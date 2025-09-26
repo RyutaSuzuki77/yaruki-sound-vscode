@@ -1,13 +1,13 @@
-import Timer from './Timer';
+import ITimer from './ITimer';
 
-class RestTimer implements Timer {
+class RestTimer implements ITimer {
     private intervalId: NodeJS.Timeout | null = null;
     private startTime: number = Date.now();
     constructor(private limit: number, private soundPath: string, private playSound: (path: string) => void) {}
 
     start(): void {
         if (this.intervalId) return;
-        
+
         this.intervalId = setInterval(() => {
             if (Date.now() - this.startTime > this.limit) {
                 this.playSound(this.soundPath);
