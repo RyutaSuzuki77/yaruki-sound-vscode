@@ -2,6 +2,7 @@
   "name": "yaruki-sound-zundamon",
   "displayName": "Yaruki Sound Zundamon",
   "description": "ずんだもんが開発を応援してくれる癒し系通知拡張",
+  "publisher": "RyutaSuzuki",
   "icon": "icon.png",
   "keywords": ["zundamon", "voicevox", "notification", "sound", "motivation", "休憩", "癒し"],
   "version": "0.0.1",
