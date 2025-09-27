@@ -5,7 +5,7 @@
   "publisher": "RyutaSuzuki",
   "icon": "icon.png",
   "keywords": ["zundamon", "voicevox", "notification", "sound", "motivation", "休憩", "癒し"],
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/RyutaSuzuki77/yaruki-sound-vscode"
