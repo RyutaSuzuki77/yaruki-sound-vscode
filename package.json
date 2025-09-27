@@ -16,10 +16,6 @@
   "categories": [
     "Other"
   ],
-  "files": [
-  "media/**/*",
-  "out/**/*"
-],
   "activationEvents": ["*"],
   "main": "./dist/extension.js",
   "contributes": {
