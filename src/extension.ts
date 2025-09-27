@@ -6,6 +6,7 @@ import TriggerTimer from './timers/TriggerTimer';
 let isPlaying: boolean = false;
 const restTimeLimit = 1000 * 60 * 60; //1時間
 const inputObserverLimit = 1000 * 60 * 5; //5分
+const errorLimit = 2; //エラー数閾値
 let restTimer: TriggerTimer;
 let inputObserverTimer: TriggerTimer;
 
@@ -17,22 +18,26 @@ export function activate(context: vscode.ExtensionContext) {
 	// 手が止まってる
 	inputObserverTimer = new TriggerTimer(inputObserverLimit, path.join(context.extensionPath, 'media', 'sounds', '001_zundamon_typing_stop.wav'), playSound);
 	inputObserverTimer.start();
+	vscode.workspace.onDidChangeTextDocument(() => {
+		inputObserverTimer.reset();
+	});
 
 	// エラー発生
 	context.subscriptions.push(
 		vscode.languages.onDidChangeDiagnostics((e) => {
 			const diagnostics = vscode.languages.getDiagnostics();
 
-			const hasError = diagnostics.some(([_, diags]) =>
-				diags.some(d => d.severity === vscode.DiagnosticSeverity.Error)
-			);
+			const errorCount = diagnostics.reduce((acc, [_, diags]) =>
+				acc + diags.filter(d => d.severity === vscode.DiagnosticSeverity.Error).length
+			, 0);
 
-			if (hasError) {
+			if (errorCount >= errorLimit) {
 				const soundPath = path.join(context.extensionPath, 'media', 'sounds', '003_zundamon_error.wav');
 				playSound(soundPath);
 			}
 		})
 	);
+
 	// お疲れ
 	context.subscriptions.push(
 		vscode.commands.registerCommand('extension.playSound_002_otukare', () => {
@@ -40,10 +45,6 @@ export function activate(context: vscode.ExtensionContext) {
 			playSound(soundPath);
 		})
 	);
-
-	vscode.workspace.onDidChangeTextDocument(() => {
-		inputObserverTimer.reset();
-	});
 }
 
 function playSound(soundPath: string) {
