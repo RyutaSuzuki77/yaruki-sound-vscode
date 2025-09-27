@@ -29,11 +29,11 @@ export function activate(context: vscode.ExtensionContext) {
 	SoundPlayer.play(path.join(context.extensionPath, 'media', 'sounds', '005_zundamon_start.wav'));
 	
 	// 1時間経過
-	restTimer = new TriggerTimer(restTimeLimit, path.join(context.extensionPath, 'media', 'sounds', '004_zundamon_kyuukei.wav'), SoundPlayer.play);
+	restTimer = new TriggerTimer(restTimeLimit, path.join(context.extensionPath, 'media', 'sounds', '004_zundamon_kyuukei.wav'), SoundPlayer.play.bind(SoundPlayer));
 	restTimer.start();
 
 	// 手が止まってる
-	inputObserverTimer = new TriggerTimer(inputObserverLimit, path.join(context.extensionPath, 'media', 'sounds', '001_zundamon_typing_stop.wav'), SoundPlayer.play);
+	inputObserverTimer = new TriggerTimer(inputObserverLimit, path.join(context.extensionPath, 'media', 'sounds', '001_zundamon_typing_stop.wav'), SoundPlayer.play.bind(SoundPlayer));
 	inputObserverTimer.start();
 	vscode.workspace.onDidChangeTextDocument(() => {
 		inputObserverTimer.reset();
