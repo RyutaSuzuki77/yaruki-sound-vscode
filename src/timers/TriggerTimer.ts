@@ -1,6 +1,6 @@
 import ITimer from './ITimer';
 
-class RestTimer implements ITimer {
+class TriggerTimer implements ITimer {
     private intervalId: NodeJS.Timeout | null = null;
     private startTime: number = Date.now();
     constructor(private limit: number, private soundPath: string, private playSound: (path: string) => void) {}
@@ -28,4 +28,4 @@ class RestTimer implements ITimer {
     }
 }
 
-export default RestTimer;
+export default TriggerTimer;
