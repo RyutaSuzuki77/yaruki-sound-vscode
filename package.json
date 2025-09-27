@@ -1,8 +1,15 @@
 {
-  "name": "yaruki-sound-vscode",
-  "displayName": "",
-  "description": "Depending on the conditions, it will tweet a motivating message.",
+  "name": "yaruki-sound-zundamon",
+  "displayName": "Yaruki Sound Zundamon",
+  "description": "ずんだもんが開発を応援してくれる癒し系通知拡張",
+  "icon": "icon.png",
+  "keywords": ["zundamon", "voicevox", "notification", "sound", "motivation", "休憩", "癒し"],
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RyutaSuzuki77/yaruki-sound-vscode"
+  },
+
   "engines": {
     "vscode": "^1.104.0"
   },
@@ -10,20 +17,25 @@
     "Other"
   ],
   "files": [
-    "media"
-  ],
+  "media/**/*",
+  "out/**/*"
+],
   "activationEvents": ["*"],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "extension.playSound_002_otukare",
+        "command": "zundamon.playSound_002_otukare",
         "title": "Play Sound"
+      },
+      {
+        "command": "zundamon.toggleActive",
+        "title": "Toggle Zundamon Active"
       }
     ],
     "keybindings": [
       {
-        "command": "extension.playSound_002_otukare",
+        "command": "zundamon.playSound_002_otukare",
         "key": "ctrl+s",
         "when": "editorTextFocus"
       }
